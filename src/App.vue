@@ -5,6 +5,8 @@
       <p class='lead'>{{subText}}</p>
       <hr class='my-4'>
       <button v-on:click='loadIP' class='btn btn-primary'>Get your IP</button>
+      <button v-on:click='sendGET' class='btn btn-warning'>Send GET</button>
+      <button v-on:click='sendPOST' class='btn btn-warning'>Send POST</button>
       <button v-on:click='reset' class='btn btn-secondary'>Reset</button>
     </div>
   </div>
@@ -29,6 +31,18 @@ export default {
     reset: function() {
       this.headerText = 'We don\'t know your IP'
       this.subText = 'Click the button to get your IP'
+    },
+    sendGET: function() {
+      this.$http.get('http://arayaq.com:8080/?query=test').then(response => {
+
+      })
+    },
+    sendPOST: function() {
+      this.$http.post('http://arayaq.com:8080', {name: 'Angel'}).then(response => {
+
+      }, response => {
+        alert('Something went wrong. CORS!')
+      })
     }
   }
 }
